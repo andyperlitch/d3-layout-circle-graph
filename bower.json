@@ -1,0 +1,32 @@
+{
+  "name": "d3-layout-circle-graph",
+  "description": "A d3 layout generator for visualizing a graph using a circle of nodes and chords connecting them",
+  "main": "circleGraph.js",
+  "authors": [
+    "Andy Perlitch (@andyperlitch)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "d3",
+    "layout",
+    "circle",
+    "graph",
+    "circular",
+    "radial",
+    "chords",
+    "tension",
+    "non-hierarchical"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.12"
+  }
+}

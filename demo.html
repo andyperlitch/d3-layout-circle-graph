@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+svg {
+  display: block;
+  margin: 10px auto 0;
+}
+circle.main-circle {
+  stroke: #DDD;
+  stroke-width: 6px;
+  fill: none;
+}
+circle.node {
+  fill: red;
+}
+text.node {
+  font-size: 10px;
+}
+path.edge {
+  stroke-width: 1px;
+  stroke: #CCC;
+  fill: none;
+}
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="./circleGraph.js"></script>
+<script>
+
+var radius = 250;
+var margin = 50;
+var outerRadius = radius + margin;
+  
+var nodes = [
+  { name: 'node1' },
+  { name: 'node2' },
+  { name: 'node3' },
+  { name: 'node4' },
+  { name: 'node5' },
+  { name: 'node6' },
+  { name: 'node7' },
+  { name: 'node8' },
+  { name: 'node9' },
+  { name: 'node10' },
+  { name: 'node11' },
+  { name: 'node12' },
+  { name: 'node13' }
+];
+
+var edges = [
+  { source: 'node1', target: 'node2' },
+  { source: 'node1', target: 'node4' },
+  { source: 'node1', target: 'node6' },
+  { source: 'node1', target: 'node8' },
+  { source: 'node1', target: 'node10' },
+  { source: 'node9', target: 'node4' },
+  { source: 'node10', target: 'node6' },
+  { source: 'node11', target: 'node8' },
+  { source: 'node12', target: 'node10' }
+];
+
+// Create the layout
+var circleGraph = d3.layout.circleGraph()
+  .tension(0.2)
+  .radius(radius)
+  .nodes(nodes)
+  .edges(edges);
+
+var svg = d3.select('body')
+  .append('svg')
+  .attr('width', outerRadius * 2)
+  .attr('height', outerRadius * 2)
+  .append('g')
+  .attr('transform', 'translate(' + outerRadius + ', ' + outerRadius + ') rotate(180)');
+
+// draw main circle
+svg.append('circle')
+  .classed('main-circle', true)
+  .attr('r', radius);
+
+// draw edges
+svg.selectAll('path.edge')
+  .data(edges)
+  .enter()
+    .append('path')
+    .classed('edge', true)
+    .attr('d', circleGraph.line);
+
+// draw circles
+svg.selectAll('circle.node')
+  .data(nodes)
+  .enter()
+    .append('circle')
+    .classed('node', true)
+    .attr('r', 5)
+    .attr('cx', function (d) { return d.x; })
+    .attr('cy', function (d) { return d.y; });
+
+// draw labels
+svg.selectAll('text.node')
+  .data(nodes)
+  .enter()
+    .append('text')
+    .classed('node', true)
+    .attr({
+      'text-anchor': function (d) {
+        return (d.degrees > 180) ? 'end' : 'begin';
+      },
+      dy: '0.3em',
+      dx: function(d) {
+        return (d.degrees > 180) ? '-1em' : '1em';
+      },
+      transform: function (d) {
+        var degrees = d.degrees + 90;
+        var xTranslate = radius;
+        if (d.degrees > 180) {
+          degrees -= 180;
+          xTranslate *= -1;
+        }
+        return 'rotate(' + degrees + ') translate(' + xTranslate + ', 0)';
+      }
+    })
+    .text(function(d) {
+      return d.name;
+    });
+
+
+</script>
