@@ -8,7 +8,7 @@
   function circleGraph() {
 
     var radius;
-    var nodeMap = {};
+    var nodeMap;
     var nodeKeyAccessor = function(n) {
       return n.name;
     };
@@ -52,6 +52,7 @@
       },
 
       nodes: function (nodes) {
+        nodeMap = {};
         var numNodes = nodes.length;
         var radianSeparation = (2 * Math.PI) / numNodes;
         nodes.forEach(function(n, i) {
@@ -102,7 +103,11 @@
         return layout;
       },
 
-      line: pathFn
+      line: pathFn,
+
+      nodeMap: function() {
+        return nodeMap;
+      }
     };
 
     return layout;

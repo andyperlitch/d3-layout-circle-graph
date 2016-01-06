@@ -101,3 +101,8 @@ function edgeTargetAccessor(edge) {
   return edge.target;
 }
 ```
+
+### `circleGraph.nodeMap()`
+
+Returns an object that maps identities to nodes. Sometimes useful in client code.
+
