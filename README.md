@@ -2,8 +2,9 @@ d3.layout.circleGraph
 ====================================================
 
 A d3 layout generator for visualizing a graph using a circle of nodes and chords connecting them.
+Kind of like [this block](http://bl.ocks.org/sjengle/5432087) by [sjengle](http://bl.ocks.org/sjengle).
 
-![screenshot of demo](demo.png)
+<img src="demo.png" width="400" alt="screenshot of demo">
 
 ```bash
 bower install d3-layout-circle-graph
