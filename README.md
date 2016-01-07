@@ -66,7 +66,7 @@ Sets the tension of the `bundle` line function that is available at `circleGraph
 
 ### `circleGraph.nodes([nodes])`
 
-Runs the layout on the provided nodes, adding the `x`, `y`, and `degrees` properties. By default, assumes that there is an identifying property called `name` on each node. To change this behavior, use the `circleGraph.key` function.
+Runs the layout on the provided nodes, adding the `x`, `y`, `radians` and `degrees` properties. By default, assumes that there is an identifying property called `name` on each node. To change this behavior, use the `circleGraph.key` function.
 
 ### `circleGraph.edges([edges])`
 
