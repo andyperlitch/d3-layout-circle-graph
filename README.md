@@ -40,7 +40,7 @@ var layout = d3.layout.circleGraph()
   .edges(myEdges);
 ```
 
-The node objects will be endowed with `x`, `y`, and `degrees` properties. These can be used to visualize the graph as a circle.
+The node objects will be endowed with `x`, `y`, `radians`, and `degrees` properties. These can be used to visualize the graph as a circle.
 
 The edge objects will be endowed with a `coords` property, which is an array of three coordinates: the source node point, the center of the circle (as a control point), and the target node point.
 

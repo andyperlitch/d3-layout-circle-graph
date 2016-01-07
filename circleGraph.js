@@ -58,12 +58,12 @@
         nodes.forEach(function(n, i) {
 
           // calculate radians
-          var radians = i * radianSeparation;
-          n.degrees = radiansToDegrees(radians);
+          n.radians = Math.PI - i * radianSeparation;
+          n.degrees = radiansToDegrees(n.radians);
 
           // set x and y based on radians and radius
-          n.x = Math.round(Math.sin(radians) * radius * 100)/100;
-          n.y = Math.round(Math.cos(radians) * radius * 100)/100;
+          n.x = Math.round(Math.sin(n.radians) * radius * 100)/100;
+          n.y = Math.round(Math.cos(n.radians) * radius * 100)/100;
 
           // add to map
           nodeMap[ nodeKeyAccessor(n) ] = n;

@@ -51,7 +51,7 @@ var edges = [
   { source: 'node1', target: 'node2' },
   { source: 'node1', target: 'node4' },
   { source: 'node1', target: 'node6' },
-  { source: 'node1', target: 'node8' },
+  { source: 'node1', target: 'node7' },
   { source: 'node1', target: 'node10' },
   { source: 'node9', target: 'node4' },
   { source: 'node10', target: 'node6' },
@@ -71,7 +71,7 @@ var svg = d3.select('body')
   .attr('width', outerRadius * 2)
   .attr('height', outerRadius * 2)
   .append('g')
-  .attr('transform', 'translate(' + outerRadius + ', ' + outerRadius + ') rotate(180)');
+  .attr('transform', 'translate(' + outerRadius + ', ' + outerRadius + ')');
 
 // draw main circle
 svg.append('circle')
@@ -104,16 +104,16 @@ svg.selectAll('text.node')
     .classed('node', true)
     .attr({
       'text-anchor': function (d) {
-        return (d.degrees > 180) ? 'end' : 'begin';
+        return (Math.sin(d.radians) < 0) ? 'end' : 'begin';
       },
       dy: '0.3em',
       dx: function(d) {
-        return (d.degrees > 180) ? '-1em' : '1em';
+        return (Math.sin(d.radians) < 0) ? '-1em' : '1em';
       },
       transform: function (d) {
-        var degrees = d.degrees + 90;
+        var degrees = -d.degrees + 90;
         var xTranslate = radius;
-        if (d.degrees > 180) {
+        if (Math.sin(d.radians) < 0) {
           degrees -= 180;
           xTranslate *= -1;
         }
