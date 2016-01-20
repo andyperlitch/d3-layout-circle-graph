@@ -25,6 +25,14 @@
       return line(d.coords);
     };
 
+    function radiansToX(radians) {
+      return Math.round(Math.sin(radians) * radius * 100)/100;
+    }
+
+    function radiansToY(radians) {
+      return Math.round(Math.cos(radians) * radius * 100)/100;
+    }
+
     // Public API
     var layout = {
       tension: function(t) {
@@ -62,8 +70,8 @@
           n.degrees = radiansToDegrees(n.radians);
 
           // set x and y based on radians and radius
-          n.x = Math.round(Math.sin(n.radians) * radius * 100)/100;
-          n.y = Math.round(Math.cos(n.radians) * radius * 100)/100;
+          n.x = radiansToX(n.radians);
+          n.y = radiansToY(n.radians);
 
           // add to map
           nodeMap[ nodeKeyAccessor(n) ] = n;
@@ -93,11 +101,25 @@
           var coords = [];
           var from = nodeMap[ edgeSourceKeyAccessor(e) ];
           var to = nodeMap[ edgeTargetKeyAccessor(e) ];
-          coords.push(
-            [ from.x, from.y ],
-            [0,0],
-            [ to.x, to.y ]
-          );
+          if (from !== to) {
+            coords.push(
+              [ from.x, from.y ],
+              [0,0],
+              [ to.x, to.y ]
+            );
+          }
+          else {
+            var mp1Radians = from.radians + Math.PI / 2;
+            var mp2Radians = from.radians + Math.PI;
+            var mp3Radians = from.radians + 3 * Math.PI / 2;
+            coords.push(
+              [ from.x, from.y ],
+              [ radiansToX(mp1Radians), radiansToY(mp1Radians)],
+              [ radiansToX(mp2Radians), radiansToY(mp2Radians)],
+              [ radiansToX(mp3Radians), radiansToY(mp3Radians)],
+              [ from.x, from.y ]
+            );
+          }
           e.coords = coords;
         });
         return layout;
