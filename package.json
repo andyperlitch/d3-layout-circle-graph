@@ -1,6 +1,6 @@
 {
   "name": "d3-layout-circle-graph",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A d3 layout generator for visualizing a graph using a circle of nodes and chords connecting them",
   "main": "circleGraph.js",
   "scripts": {
