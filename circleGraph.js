@@ -63,6 +63,7 @@
         nodeMap = {};
         var numNodes = nodes.length;
         var radianSeparation = (2 * Math.PI) / numNodes;
+        var halfSeparation = radianSeparation / 2;
         nodes.forEach(function(n, i) {
 
           // calculate radians
@@ -72,6 +73,12 @@
           // set x and y based on radians and radius
           n.x = radiansToX(n.radians);
           n.y = radiansToY(n.radians);
+
+          // set the range
+          n.radianRange = [
+            n.radians - halfSeparation,
+            n.radians + halfSeparation
+          ];
 
           // add to map
           nodeMap[ nodeKeyAccessor(n) ] = n;
