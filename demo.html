@@ -111,7 +111,7 @@ svg.selectAll('text.node')
         return (Math.sin(d.radians) < 0) ? '-1em' : '1em';
       },
       transform: function (d) {
-        var degrees = -d.degrees + 90;
+        var degrees = d.degrees - 90;
         var xTranslate = radius;
         if (Math.sin(d.radians) < 0) {
           degrees -= 180;

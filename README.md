@@ -40,7 +40,7 @@ var layout = d3.layout.circleGraph()
   .edges(myEdges);
 ```
 
-The node objects will be endowed with `x`, `y`, `radians`, `radianRange`, and `degrees` properties. These can be used to visualize the graph as a circle.
+The node objects will be endowed with `x`, `y`, `radians`, `radianRange`, and `degrees` properties. These can be used to visualize the graph as a circle. Note that 0° is assumed to be 12 o'clock, and increases going clockwise.
 
 ### `node.x`, `node.y`
 

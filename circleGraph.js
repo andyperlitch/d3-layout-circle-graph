@@ -26,11 +26,11 @@
     };
 
     function radiansToX(radians) {
-      return Math.round(Math.sin(radians) * radius * 100)/100;
+      return Math.sin(radians) * radius;
     }
 
     function radiansToY(radians) {
-      return Math.round(Math.cos(radians) * radius * 100)/100;
+      return Math.cos(radians) * -radius;
     }
 
     // Public API
@@ -42,7 +42,7 @@
         }
         return line.tension();
       },
-      
+
       key: function(fn) {
         if (fn) {
           nodeKeyAccessor = fn;
@@ -50,7 +50,7 @@
         }
         return nodeKeyAccessor;
       },
-      
+
       radius: function (r) {
         if (typeof r === 'number') {
           radius = r;
@@ -67,7 +67,7 @@
         nodes.forEach(function(n, i) {
 
           // calculate radians
-          n.radians = Math.PI - i * radianSeparation;
+          n.radians = i * radianSeparation;
           n.degrees = radiansToDegrees(n.radians);
 
           // set x and y based on radians and radius
