@@ -63,6 +63,7 @@ var edges = [
 var circleGraph = d3.layout.circleGraph()
   .tension(0.2)
   .radius(radius)
+  .range(Math.PI * 3 / 2)
   .nodes(nodes)
   .edges(edges);
 

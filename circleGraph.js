@@ -9,6 +9,7 @@
 
     var radius;
     var nodeMap;
+    var range = Math.PI * 2;
     var nodeKeyAccessor = function(n) {
       return n.name;
     };
@@ -59,10 +60,18 @@
         return radius;
       },
 
+      range: function(r) {
+        if (typeof r === 'number') {
+          range = r;
+          return layout;
+        }
+        return range;
+      },
+
       nodes: function (nodes) {
         nodeMap = {};
         var numNodes = nodes.length;
-        var radianSeparation = (2 * Math.PI) / numNodes;
+        var radianSeparation = range / numNodes;
         var halfSeparation = radianSeparation / 2;
         nodes.forEach(function(n, i) {
 
@@ -108,6 +117,22 @@
           var coords = [];
           var from = nodeMap[ edgeSourceKeyAccessor(e) ];
           var to = nodeMap[ edgeTargetKeyAccessor(e) ];
+          if (!from) {
+            console.error('d3.layout.circleGraph: Could not find source from given edge.',
+              ' nodeMap: ', nodeMap,
+              ' edge: ', e,
+              ' edgeSourceKeyAccessor: ', edgeSourceKeyAccessor.toString()
+            );
+            throw new Error('d3.layout.circleGraph: Could not find source from given edge.');
+          }
+          if (!to) {
+            console.error('d3.layout.circleGraph: Could not find target from given edge.',
+              ' nodeMap: ', nodeMap,
+              ' edge: ', e,
+              ' edgeTargetKeyAccessor: ', edgeTargetKeyAccessor.toString()
+            );
+            throw new Error('d3.layout.circleGraph: Could not find target from given edge.');
+          }
           if (from !== to) {
             coords.push(
               [ from.x, from.y ],

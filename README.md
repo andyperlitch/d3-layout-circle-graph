@@ -118,3 +118,13 @@ function edgeTargetAccessor(edge) {
 
 Returns an object that maps identities to nodes. Sometimes useful in client code.
 
+
+### `circleGraph.range([number])`
+
+Sets or gets the "range" in radians of a complete circle within which the nodes should be evenly distributed. Default is `Math.PI * 2` (which represents the complete circle).
+
+For example, calling `circleGraph.range(Math.PI * 3/2)` on the demo will result in this:
+
+<img src="demo-with-range.png" width="400" alt="screenshot of demo with range()">
+
+> **WARNING:** This must be called _before_ `.nodes()` gets called.
